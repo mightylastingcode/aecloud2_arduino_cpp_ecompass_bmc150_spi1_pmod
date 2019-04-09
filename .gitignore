@@ -5,4 +5,5 @@ userpackexportsettings.xml
 src/synergy_gen/
 synergy/
 synergy_cfg/
-#.settings/
+.settings/
+~$AE*

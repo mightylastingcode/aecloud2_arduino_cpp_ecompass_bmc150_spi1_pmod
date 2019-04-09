@@ -65,6 +65,20 @@ void  SPI1::read_transfer(char* const p_dest, int const length) {
 void  SPI1::write_transfer(char* const p_src, int const length) {
 
 }
-void  SPI1::readwrite_transfer(char* const p_dest, char* const p_src, int const length) {
+
+// p_src:  command string (only one byte is used.)
+// p_dest: data string
+// length: command length + data length
+void  SPI1::readwrite_transfer(char* const p_src, char* const p_dest, int const length) {
+    ssp_err_t err = SSP_SUCCESS;
+
+    // Length of buffer read includes command??
+    err = g_sf_spi_device0.p_api->writeRead(g_sf_spi_device1.p_ctrl, p_src, p_dest, length+1, SPI_BIT_WIDTH_8_BITS, TX_WAIT_FOREVER);
+    if (err)
+        APP_ERR_TRAP(err)
+
+    for (int i=0; i < length; i++) {
+        *(p_dest+i) = *(p_dest+i+1);   // Remove the -1 data in the first element. Shift other data down by 1.
+    }
 
 }

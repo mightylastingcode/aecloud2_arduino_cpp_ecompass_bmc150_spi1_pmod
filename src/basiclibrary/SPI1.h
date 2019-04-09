@@ -49,7 +49,7 @@ class SPI1 {  // SPI1 bus
     // read n bytes from the slave device
     void  read_transfer(char* const p_dest, int const length);
     void  write_transfer(char* const p_src, int const length);
-    void  readwrite_transfer(char* const p_dest, char* const p_src, int const length);
+    void  readwrite_transfer(char* const p_src, char* const p_dest, int const length);
   private:
     spi1_cs_pin_t device_cs_pin = SPI1_SSL0;     // device select pin
 };
